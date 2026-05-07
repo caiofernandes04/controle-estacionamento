@@ -103,13 +103,15 @@ body{
 .ticket{
     background: #fff;
 
-    width: 320px;
+    width: 100%;
 
-    padding: 20px;
+    max-width: 700px;
 
-    border-radius: 8px;
+    padding: 35px;
 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border-radius: 16px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
 .paper{
@@ -163,26 +165,45 @@ h1{
 }
 
 .field label{
-    font-size: 12px;
+    font-size: 13px;
+
+    font-weight: bold;
 
     display: block;
 
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+
+    color: #374151;
 }
 
 .field input,
 .field select{
     width: 100%;
 
-    padding: 8px;
+    padding: 14px;
 
-    border-radius: 20px;
+    border-radius: 10px;
 
-    border: 1px solid #ccc;
+    border: 1px solid #d1d5db;
 
-    font-size: 12px;
+    font-size: 14px;
 
     box-sizing: border-box;
+
+    transition: 0.3s;
+
+    background: #f9fafb;
+}
+
+.field input:focus,
+.field select:focus{
+    outline: none;
+
+    border-color: #111827;
+
+    background: white;
+
+    box-shadow: 0 0 0 3px rgba(17,24,39,0.1);
 }
 
 .row{
@@ -213,7 +234,11 @@ h1{
 button{
     width: 100%;
 
-    padding: 10px;
+    padding: 14px;
+
+    font-size: 14px;
+
+    font-weight: bold;
 
     background: #000;
 
@@ -356,6 +381,8 @@ table{
     width: 100%;
 
     border-collapse: collapse;
+
+    table-layout: fixed;
 }
 
 thead{
@@ -365,15 +392,19 @@ thead{
 }
 
 th{
-    padding: 15px;
+    padding: 18px;
 
     text-align: left;
+
+    font-size: 14px;
 }
 
 td{
-    padding: 15px;
+    padding: 18px;
 
     border-bottom: 1px solid #ddd;
+
+    font-size: 14px;
 }
 
 tr:hover{
@@ -383,9 +414,11 @@ tr:hover{
 .empty{
     text-align: center;
 
-    padding: 30px;
+    padding: 40px !important;
 
     color: #777;
+
+    font-size: 16px;
 }
 
 
@@ -548,4 +581,44 @@ tr:hover{
     background: #1f2937;
 
     transform: translateY(-2px);
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.dashboard-cards{
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.card{
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+.card h3{
+    font-size: 14px;
+
+    color: #6b7280;
+
+    margin-bottom: 10px;
+}
+
+.card p{
+    font-size: 28px;
+
+    font-weight: bold;
+
+    color: #111827;
 }

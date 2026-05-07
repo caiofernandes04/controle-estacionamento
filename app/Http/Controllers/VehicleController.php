@@ -292,7 +292,23 @@ class VehicleController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('pages.relatorios', compact('vehicles'));
+        // Cards
+
+        $totalVeiculos = $query->count();
+        $totalValue = $query->sum('value');
+        $visitCount = $query->where('type', 'visit')->count();
+        $ecoCount = $query->where('type', 'eco')->count();
+        $averageTicket = $totalVeiculos > 0 ? $totalValue / $totalVeiculos : 0;
+
+
+         return view('pages.relatorios', compact(
+            'vehicles',
+            'totalVeiculos',
+            'totalValue',
+            'visitCount',
+            'ecoCount',
+            'averageTicket'
+        ));
     }
 
 }

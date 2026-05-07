@@ -77,7 +77,7 @@
         @empty
 
             <tr>
-                <td colspan="3" class="empty">
+                <td colspan="7" class="empty">
                     Nenhum veículo no pátio
                 </td>
             </tr>

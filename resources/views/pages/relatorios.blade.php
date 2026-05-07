@@ -67,6 +67,62 @@
 
 </div>
 
+<div class="dashboard-cards">
+
+    <div class="card">
+
+        <h3>Total Veículos</h3>
+
+        <p>
+            {{ $totalVeiculos }}
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Total Faturado</h3>
+
+        <p>
+            R$ {{ number_format($totalValue, 2, ',', '.') }}
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Ticket Médio</h3>
+
+        <p>
+            R$ {{ number_format($averageTicket, 2, ',', '.') }}
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Visitantes</h3>
+
+        <p>
+            {{ $visitCount }}
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Eco</h3>
+
+        <p>
+            {{ $ecoCount }}
+        </p>
+
+    </div>
+
+
+
+</div>
+
 <div class="paper">
 
     <h1>
@@ -83,6 +139,7 @@
                 <th>Tipo</th>
                 <th>Entrada</th>
                 <th>Valor</th>
+                <th>Permanência</th>
             </tr>
 
         </thead>
@@ -117,6 +174,18 @@
 
                 <td>
                     R$ {{ $vehicle->value }}
+                </td>
+
+                <td>
+
+                    {{
+                        \Carbon\Carbon::parse($vehicle->entry_time)
+                        ->diff(
+                            \Carbon\Carbon::parse($vehicle->exits_time)
+                        )
+                        ->format('%Hh %Im')
+                    }}
+
                 </td>
 
             </tr>
