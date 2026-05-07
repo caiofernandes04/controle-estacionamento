@@ -75,6 +75,7 @@
                 <th>Placa</th>
                 <th>Tipo</th>
                 <th>Entrada</th>
+                <th>Valor</th>
             </tr>
 
         </thead>
@@ -105,6 +106,10 @@
 
                 <td>
                     {{ $vehicle->entry_time }}
+                </td>
+
+                <td>
+                    {{ $vehicle->value }}
                 </td>
 
             </tr>

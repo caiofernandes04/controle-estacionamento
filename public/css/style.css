@@ -451,3 +451,101 @@ tr:hover{
 
     margin: 0;
 }
+
+/* =========================
+   FORMULARIO DE FILTOS
+========================= */
+
+.report-filter{
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+
+    margin-bottom: 25px;
+}
+
+.report-filter form{
+    display: flex;
+
+    gap: 15px;
+
+    align-items: end;
+
+    flex-wrap: wrap;
+}
+
+.report-field{
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 180px;
+
+    flex: 1;
+}
+
+.report-field label{
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #374151;
+
+    margin-bottom: 6px;
+}
+
+.report-field input,
+.report-field select{
+    padding: 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+
+    background: #f9fafb;
+}
+
+.report-field input:focus,
+.report-field select:focus{
+    border-color: #111827;
+
+    background: white;
+
+    box-shadow: 0 0 0 3px rgba(17,24,39,0.1);
+}
+
+.report-button{
+    height: 45px;
+
+    padding: 0 24px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #111827;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.report-button:hover{
+    background: #1f2937;
+
+    transform: translateY(-2px);
+}

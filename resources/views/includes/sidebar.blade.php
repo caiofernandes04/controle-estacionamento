@@ -5,6 +5,7 @@
     <a href="{{ route('dashboard') }}">📊 Dashboard</a>
     <a href="{{ route('entrada.index') }}">🚗 Entrada</a>
     <a href="{{ route('veiculos.index') }}">📋 Pátio</a>
+    <a href="{{ route('relatorios.reports') }}">🗂️ Relatórios</a>
     
 
 </div>

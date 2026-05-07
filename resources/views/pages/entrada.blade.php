@@ -14,8 +14,6 @@
             Comprovante de Estacionamento
         </div>
 
-        @include('includes.alerts')
-
         <form method="POST" action="/entrada">
 
             @csrf

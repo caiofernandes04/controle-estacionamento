@@ -19,4 +19,5 @@ Route::put('/veiculos/{id}/saida', [VehicleController::class, 'exit'])->name('ve
 
 Route::get('/', [VehicleController::class, 'dashboard'])->name('dashboard');
 
+Route::get('/relatorios', [VehicleController::class, 'reports'])->name('relatorios.reports');
 
