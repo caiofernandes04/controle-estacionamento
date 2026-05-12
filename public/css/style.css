@@ -622,3 +622,69 @@ tr:hover{
 
     color: #111827;
 }
+
+/* =========================
+   EXPORT BUTTONS
+========================= */
+
+.export-buttons{
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+    flex-wrap: wrap;
+}
+
+.export-buttons a{
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+    min-width: 170px;
+}
+
+
+/* PDF */
+
+.pdf-button{
+    background: #dc2626;
+
+    color: white;
+}
+
+.pdf-button:hover{
+    background: #b91c1c;
+
+    transform: translateY(-2px);
+}
+
+
+/* EXCEL */
+
+.excel-button{
+    background: #15803d;
+
+    color: white;
+}
+
+.excel-button:hover{
+    background: #166534;
+
+    transform: translateY(-2px);
+}

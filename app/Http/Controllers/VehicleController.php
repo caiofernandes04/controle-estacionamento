@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\VehiclesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VehicleController extends Controller
 {
@@ -311,4 +315,42 @@ class VehicleController extends Controller
         ));
     }
 
+    public function exportPdf(Request $request)
+    {
+        $vehicles = Vehicle::query();
+
+        if($request->start_date){
+
+            $vehicles->whereDate('day_entry', '>=', $request->start_date);
+        }
+
+        if($request->end_date){
+
+            $vehicles->whereDate('day_entry', '<=', $request->end_date);
+        }
+
+        if($request->plate){
+
+            $vehicles->where('plate', 'like', '%' . $request->plate . '%');
+        }
+
+        if($request->type){
+
+            $vehicles->where('type', $request->type);
+        }
+
+        $vehicles = $vehicles->get();
+
+        $pdf = Pdf::loadView('pages.reports.pdf', compact('vehicles'));
+
+        return $pdf->download('relatorio.pdf');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(
+            new VehiclesExport,
+            'relatorio.xlsx'
+        );
+    }
 }

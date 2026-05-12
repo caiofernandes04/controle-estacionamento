@@ -123,6 +123,24 @@
 
 </div>
 
+<div class="export-buttons">
+
+    <a 
+        href="{{ route('vehicles.pdf', request()->query()) }}"
+        class="pdf-button"
+    >
+        Exportar PDF
+    </a>
+
+    <a 
+    href="{{ route('vehicles.excel') }}"
+    class="excel-button"
+    >
+        Exportar Excel
+    </a>
+
+</div>
+
 <div class="paper">
 
     <h1>
@@ -207,5 +225,7 @@
     </table>
 
 </div>
+
+
 
 @endsection

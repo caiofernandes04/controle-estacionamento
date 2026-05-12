@@ -21,3 +21,6 @@ Route::get('/', [VehicleController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/relatorios', [VehicleController::class, 'reports'])->name('relatorios.reports');
 
+Route::get('/relatorios/pdf', [VehicleController::class, 'exportPdf'])->name('vehicles.pdf');
+
+Route::get('/relatorios/excel', [VehicleController::class, 'exportExcel'])->name('vehicles.excel');
