@@ -21,6 +21,96 @@ body{
     display: flex;
 }
 
+body.auth-page{
+    min-height: 100vh;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 24px;
+}
+
+.auth-wrapper{
+    width: 100%;
+
+    max-width: 460px;
+}
+
+.auth-card{
+    max-width: 460px;
+}
+
+.auth-text{
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+.auth-options{
+    margin: 8px 0;
+
+    color: #374151;
+
+    font-size: 13px;
+}
+
+.auth-options label{
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.auth-options input{
+    width: auto;
+}
+
+.auth-links{
+    display: flex;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    flex-wrap: wrap;
+
+    margin-top: 18px;
+
+    font-size: 13px;
+}
+
+.auth-links a{
+    color: #111827;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+.auth-links a:hover{
+    text-decoration: underline;
+}
+
+.auth-actions{
+    display: grid;
+
+    gap: 10px;
+}
+
+.secondary-button{
+    background: #6b7280;
+}
+
+.secondary-button:hover{
+    background: #4b5563;
+}
+
 
 /* =========================
    SIDEBAR

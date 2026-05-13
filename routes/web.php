@@ -1,26 +1,30 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/entrada', function () {
-    return view('pages.entrada');
-})->name('entrada.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/entrada', function () {
+        return view('pages.entrada');
+    })->name('entrada.index');
 
-Route::post('/entrada', [VehicleController::class, 'store']);
+    Route::post('/entrada', [VehicleController::class, 'store']);
 
-Route::get('/veiculos', [VehicleController::class, 'index'])->name('veiculos.index');
+    Route::get('/veiculos', [VehicleController::class, 'index'])->name('veiculos.index');
 
-Route::get('/veiculos/{id}/edit', [VehicleController::class, 'edit'])->name('vehicles.edit');
+    Route::get('/veiculos/{id}/edit', [VehicleController::class, 'edit'])->name('vehicles.edit');
 
-Route::put('/veiculos/{id}', [VehicleController::class, 'update'])->name('vehicles.update');
+    Route::put('/veiculos/{id}', [VehicleController::class, 'update'])->name('vehicles.update');
 
-Route::put('/veiculos/{id}/saida', [VehicleController::class, 'exit'])->name('vehicles.exit');
+    Route::put('/veiculos/{id}/saida', [VehicleController::class, 'exit'])->name('vehicles.exit');
 
-Route::get('/', [VehicleController::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [VehicleController::class, 'dashboard'])->name('dashboard');
 
-Route::get('/relatorios', [VehicleController::class, 'reports'])->name('relatorios.reports');
+    Route::get('/relatorios', [VehicleController::class, 'reports'])->name('relatorios.reports');
 
-Route::get('/relatorios/pdf', [VehicleController::class, 'exportPdf'])->name('vehicles.pdf');
+    Route::get('/relatorios/pdf', [VehicleController::class, 'exportPdf'])->name('vehicles.pdf');
 
-Route::get('/relatorios/excel', [VehicleController::class, 'exportExcel'])->name('vehicles.excel');
+    Route::get('/relatorios/excel', [VehicleController::class, 'exportExcel'])->name('vehicles.excel');
+});
+
+require __DIR__.'/auth.php';
