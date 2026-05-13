@@ -203,6 +203,7 @@ class VehicleController extends Controller
         }
 
         $value = $vehicle->value;
+        $type = $vehicle->type;
 
         // Se não informar valor
         if ($value === null || $value === '') {
@@ -215,6 +216,11 @@ class VehicleController extends Controller
             } else {
                 $value = 10 + (($hours - 1) * 5);
             }
+        }
+
+        // Se for eco, não tem valor
+        if ($type === 'eco') {
+            $value = null;
         }
 
         // Registrando saída
