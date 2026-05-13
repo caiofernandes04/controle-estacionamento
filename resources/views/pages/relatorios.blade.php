@@ -147,7 +147,7 @@
         Relatório
     </h1>
 
-    <table>
+    <table id="reports-table">
 
         <thead>
 
@@ -165,7 +165,7 @@
 
         <tbody>
 
-        @forelse($vehicles as $vehicle)
+        @foreach($vehicles as $vehicle)
 
             <tr>
 
@@ -213,17 +213,7 @@
 
             </tr>
 
-        @empty
-
-            <tr>
-
-                <td colspan="5" class="empty">
-                    Nenhum veículo encontrado
-                </td>
-
-            </tr>
-
-        @endforelse
+        @endforeach
 
         </tbody>
 
@@ -231,6 +221,71 @@
 
 </div>
 
-
-
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = document.querySelector('#reports-table');
+
+            if (!table) {
+                return;
+            }
+
+            if (window.DataTable) {
+                new DataTable('#reports-table', {
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/2.3.4/i18n/pt-BR.json',
+                    },
+                    pageLength: 10,
+                    order: [[3, 'desc']],
+                });
+
+                return;
+            }
+
+            const search = document.createElement('input');
+            search.type = 'search';
+            search.className = 'table-search';
+            search.placeholder = 'Buscar no relatório';
+
+            table.parentNode.insertBefore(search, table);
+
+            search.addEventListener('input', function () {
+                const term = search.value.toLowerCase();
+
+                table.querySelectorAll('tbody tr').forEach(function (row) {
+                    row.style.display = row.textContent.toLowerCase().includes(term) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+@endpush
+
+@push('styles')
+    <style>
+        .table-search{
+            width: 100%;
+            max-width: 320px;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #f9fafb;
+        }
+
+        .table-search:focus{
+            outline: none;
+            border-color: #111827;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(17,24,39,0.1);
+        }
+    </style>
+@endpush
