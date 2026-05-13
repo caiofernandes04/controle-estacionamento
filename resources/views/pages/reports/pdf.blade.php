@@ -123,6 +123,8 @@
 
                 <th>Saída</th>
 
+                <th>Usuario</th>
+
                 <th>Valor</th>
 
             </tr>
@@ -159,6 +161,10 @@
 
                     <td>
                         {{ $vehicle->exits_time ?? 'Em aberto' }}
+                    </td>
+
+                    <td>
+                        {{ $vehicle->user_name }}
                     </td>
 
                     <td>

@@ -157,7 +157,8 @@
                 <th>Tipo</th>
                 <th>Entrada</th>
                 <th>Valor</th>
-                <th>Permanência</th>
+                <th>Usuario</th>
+                <th>Permanências</th>
             </tr>
 
         </thead>
@@ -192,6 +193,10 @@
 
                 <td>
                     R$ {{ $vehicle->value }}
+                </td>
+
+                <td>
+                     {{ $vehicle->user_name }}
                 </td>
 
                 <td>

@@ -75,6 +75,7 @@
                 <th>Placa</th>
                 <th>Tipo</th>
                 <th>Entrada</th>
+                <th>Usuario</th>
                 <th>Valor</th>
             </tr>
 
@@ -109,7 +110,11 @@
                 </td>
 
                 <td>
-                    {{ $vehicle->value }}
+                    {{ $vehicle->user_name }}
+                </td>
+
+                <td>
+                    R$ {{ number_format($vehicle->value, 2, ',', '.') }}
                 </td>
 
             </tr>

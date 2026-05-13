@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\VehiclesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 
 class VehicleController extends Controller
 {
@@ -83,6 +84,7 @@ class VehicleController extends Controller
         $vehicle->value = !empty($value) ? $value : null;
         $vehicle->type = $request->type;
         $vehicle->exits_time = $request->exits_time;
+        $vehicle->user_id = Auth::id();
 
         $vehicle->save();
 
@@ -175,6 +177,7 @@ class VehicleController extends Controller
         $vehicle->plate = $plate;
         $vehicle->value = $value;
         $vehicle->type = $request->type;
+        $vehicle->user_id = Auth::id();
 
         $vehicle->save();
 
@@ -248,6 +251,8 @@ class VehicleController extends Controller
             ->sum('value');
 
         $lastVehicles = Vehicle::latest()
+            ->join('users', 'vehicles.user_id', '=', 'users.id')
+            ->select('vehicles.*', 'users.name as user_name')
             ->take(5)
             ->get();
 
@@ -256,7 +261,7 @@ class VehicleController extends Controller
             'visitToday',
             'ecoToday',
             'totalValue',
-            'lastVehicles'
+            'lastVehicles',
         ));
     }
 
@@ -293,6 +298,8 @@ class VehicleController extends Controller
         }
 
         $vehicles = $query
+            ->join('users', 'vehicles.user_id', '=', 'users.id')
+            ->select('vehicles.*', 'users.name as user_name')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -339,7 +346,10 @@ class VehicleController extends Controller
             $vehicles->where('type', $request->type);
         }
 
-        $vehicles = $vehicles->get();
+        $vehicles = $vehicles
+            ->join('users', 'vehicles.user_id', '=', 'users.id')
+            ->select('vehicles.*', 'users.name as user_name')
+            ->get();
 
         $pdf = Pdf::loadView('pages.reports.pdf', compact('vehicles'));
 

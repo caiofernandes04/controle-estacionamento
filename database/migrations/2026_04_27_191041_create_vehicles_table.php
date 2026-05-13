@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('day_entry')->nullable();
             $table->time('exits_time')->nullable();
             $table->time('entry_time')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
