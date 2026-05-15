@@ -9,6 +9,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\VehiclesExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
+use App\Models\MonthlyClient;
 
 class VehicleController extends Controller
 {
@@ -25,8 +26,9 @@ class VehicleController extends Controller
             ->where('type', 'eco')
             ->count();
 
-        $totalValue = Vehicle::whereDate('day_entry', today())
-            ->sum('value');
+        $mensalistaToday = Vehicle::whereDate('day_entry', today())
+            ->where('type', 'Mensalista')
+            ->count();
 
         $lastVehicles = Vehicle::latest()
             ->join('users', 'vehicles.user_id', '=', 'users.id')
@@ -38,8 +40,8 @@ class VehicleController extends Controller
             'vehiclesToday',
             'visitToday',
             'ecoToday',
-            'totalValue',
             'lastVehicles',
+            'mensalistaToday'
         ));
     }
 
@@ -106,11 +108,17 @@ class VehicleController extends Controller
             $vehicle->entry_time = $request->entry_time;
         }
 
+        if (MonthlyClient::where('plate', $plate)->exists()) {
+            $vehicle->type = 'Mensalista';
+            
+        } else {
+            $vehicle->type = $request->type;
+        }
+
         // Salvando dados
         $vehicle->name = $request->name;
         $vehicle->plate = $plate;
         $vehicle->value = !empty($value) ? $value : null;
-        $vehicle->type = $request->type;
         $vehicle->exits_time = $request->exits_time;
         $vehicle->user_id = Auth::id();
 
@@ -118,7 +126,7 @@ class VehicleController extends Controller
 
         return redirect()
             ->back()
-            ->with('success', 'Veículo cadastrado!');
+            ->with('success', 'Veículo ' . $vehicle->type . ' cadastrado!');
     }
 
     public function edit($id)
@@ -221,7 +229,9 @@ class VehicleController extends Controller
         // Se for eco, não tem valor
         if ($type === 'eco') {
             $value = null;
-        }
+        } else if ($type === 'Mensalista') {
+            $value = null;
+        } 
 
         // Registrando saída
         $vehicle->exits_time = now()->format('H:i:s');
@@ -268,19 +278,25 @@ class VehicleController extends Controller
             ->get();
 
         // Cards
-        $totalVeiculos = $query->count();
-        $totalValue = $query->sum('value');
-        $visitCount = $query->where('type', 'visit')->count();
-        $ecoCount = $query->where('type', 'eco')->count();
+        $totalVeiculos = (clone $query)->count();
+        $totalValue = (clone $query)->sum('value');
+        $visitCount = (clone $query)
+            ->where('type', 'visit')
+            ->count();
+        $ecoCount = (clone $query)
+            ->where('type', 'eco')
+            ->count();
+        $mensalistaCount = (clone $query)
+            ->where('type', 'Mensalista')
+            ->count();
         $averageTicket = $totalVeiculos > 0 ? $totalValue / $totalVeiculos : 0;
 
         return view('pages.relatorios', compact(
             'vehicles',
             'totalVeiculos',
-            'totalValue',
             'visitCount',
             'ecoCount',
-            'averageTicket'
+            'mensalistaCount',
         ));
     }
 

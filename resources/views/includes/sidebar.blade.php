@@ -7,7 +7,7 @@
     <a href="{{ route('veiculos.index') }}">📋 Pátio</a>
     <a href="{{ route('relatorios.reports') }}">🗂️ Relatórios</a>
     @if (auth()->user()?->role === 'admin')
-        <a href="/admin">🔑 Painel Admin</a>
+        <a href="/admin">🔑 Painel do administrador</a>
     @endif
     <form method="POST" action="{{ route('logout') }}">
         @csrf

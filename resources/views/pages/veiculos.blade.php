@@ -37,8 +37,8 @@
 
                 <td>
 
-                    <span class="badge {{ $vehicle->type == 'visit' ? 'visit' : 'eco' }}">
-                        {{ $vehicle->type == 'visit' ? 'Visitante' : 'Eco' }}
+                    <span class="badge {{ $vehicle->type }}">
+                        {{ $vehicle->type }}
                     </span>
 
                 </td>

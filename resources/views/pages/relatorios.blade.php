@@ -55,6 +55,10 @@
                     Eco
                 </option>
 
+                <option value="Mensalista">
+                    Mensalista
+                </option>
+
             </select>
 
         </div>
@@ -81,26 +85,6 @@
 
     <div class="card">
 
-        <h3>Total Faturado</h3>
-
-        <p>
-            R$ {{ number_format($totalValue, 2, ',', '.') }}
-        </p>
-
-    </div>
-
-    <div class="card">
-
-        <h3>Ticket Médio</h3>
-
-        <p>
-            R$ {{ number_format($averageTicket, 2, ',', '.') }}
-        </p>
-
-    </div>
-
-    <div class="card">
-
         <h3>Visitantes</h3>
 
         <p>
@@ -119,6 +103,14 @@
 
     </div>
 
+    <div class="card">
+
+        <h3>Mensalistas</h3>
+
+        <p>
+            {{ $mensalistaCount }}
+        </p>
+    </div>
 
 
 </div>
@@ -156,7 +148,6 @@
                 <th>Placa</th>
                 <th>Tipo</th>
                 <th>Entrada</th>
-                <th>Valor</th>
                 <th>Usuario</th>
                 <th>Permanências</th>
             </tr>
@@ -179,9 +170,9 @@
 
                 <td>
 
-                    <span class="badge {{ $vehicle->type == 'visit' ? 'visit' : 'eco' }}">
+                    <span class="badge {{ $vehicle->type }}">
 
-                        {{ $vehicle->type == 'visit' ? 'Visitante' : 'Eco' }}
+                        {{ $vehicle->type }}
 
                     </span>
 
@@ -189,10 +180,6 @@
 
                 <td>
                     {{ $vehicle->day_entry }}
-                </td>
-
-                <td>
-                    R$ {{ $vehicle->value }}
                 </td>
 
                 <td>

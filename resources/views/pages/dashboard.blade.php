@@ -49,11 +49,11 @@
     <div class="card">
 
         <h3>
-            Faturamento Hoje
+            Mensalistas
         </h3>
 
         <h1>
-            R$ {{ number_format($totalValue, 2, ',', '.') }}
+            {{ $mensalistaToday }}
         </h1>
 
     </div>
@@ -76,7 +76,6 @@
                 <th>Tipo</th>
                 <th>Entrada</th>
                 <th>Usuario</th>
-                <th>Valor</th>
             </tr>
 
         </thead>
@@ -97,9 +96,9 @@
 
                 <td>
 
-                    <span class="badge {{ $vehicle->type == 'visit' ? 'visit' : 'eco' }}">
+                    <span class="badge {{ $vehicle->type}}">
 
-                        {{ $vehicle->type == 'visit' ? 'Visitante' : 'Eco' }}
+                        {{ $vehicle->type }} 
 
                     </span>
 
@@ -112,11 +111,6 @@
                 <td>
                     {{ $vehicle->user_name }}
                 </td>
-
-                <td>
-                    R$ {{ number_format($vehicle->value, 2, ',', '.') }}
-                </td>
-
             </tr>
 
         @empty

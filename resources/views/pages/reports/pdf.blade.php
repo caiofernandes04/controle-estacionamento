@@ -125,8 +125,6 @@
 
                 <th>Usuario</th>
 
-                <th>Valor</th>
-
             </tr>
 
         </thead>
@@ -165,10 +163,6 @@
 
                     <td>
                         {{ $vehicle->user_name }}
-                    </td>
-
-                    <td>
-                        R$ {{ number_format($vehicle->value, 2, ',', '.') }}
                     </td>
 
                 </tr>
